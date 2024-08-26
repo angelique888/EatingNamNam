@@ -1,5 +1,6 @@
 const argon2 = require("argon2");
 const tables = require("../../database/tables");
+const logger = require("../../logger");
 
 const { encodeJWT, decodeJWT } = require("../helpers/jwtHelpers");
 
@@ -46,11 +47,15 @@ const checkAuth = async (req, res) => {
   const token = req.cookies?.auth_token;
 
   if (!token) {
+    
+    logger.info("Aucun token trouvé");
     return res.status(403).json(null);
   }
 
   try {
     const validToken = await decodeJWT(token);
+    
+    logger.info("Token validé:", validToken);
 
     return res
       .status(200)

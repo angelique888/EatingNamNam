@@ -2,10 +2,6 @@ const express = require("express");
 
 const router = express.Router();
 
-/* ************************************************************************* */
-// Define Your API Routes Here
-/* ************************************************************************* */
-
 const {
   browse,
   read,
@@ -25,7 +21,5 @@ router.put("/:id", edit);
 router.post("/", validateRecipeSchema, add);
 
 router.delete("/:id", destroy);
-
-/* ************************************************************************* */
 
 module.exports = router;

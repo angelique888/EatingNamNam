@@ -41,7 +41,6 @@ function RecipeDetails() {
           src={recipe_image}
           alt={recipe_name}
         />
-
         <div className="buttonContainer">
           <button type="button" className="planning">
             📅 Ajouter au planning
@@ -50,11 +49,9 @@ function RecipeDetails() {
             Mettre en favoris 🧡
           </button>
         </div>
-
         <div className="lineContainer">
           <h2 className="ingredientTitle">Ingrédients</h2>
           <div className="customLine" />
-
           <div className="ingredientContainer">
             {data.recipeIngredients.map((ingredient) => (
               <div key={ingredient.ingredient_id} className="ingredientItem">
@@ -71,9 +68,6 @@ function RecipeDetails() {
         <div className="lineContainer">
           <h2 className="recipeTitle">Recette</h2>
           <div className="customLine" />
-
-          <p className="recipeDescription">{recipe_description}</p>
-
           <p className="recipeDescription">{recipe_description}</p>
         </div>
         <div className="lineContainer">
@@ -86,11 +80,9 @@ function RecipeDetails() {
             Par : {user_firstname} {user_lastname}
           </p>
         </div>
-
         <div className="lineContainer">
           <h2 className="avisTitle">Donnez votre avis</h2>
           <div className="customLine" />
-
           <div className="comment-box">-- Ajouter un commentaire --</div>
         </div>
       </div>

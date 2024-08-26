@@ -94,10 +94,45 @@ class RecipeRepository extends AbstractRepository {
     return rows;
   }
 
+  async readRecipeLabel() {
+    const [rows] = await this.database.query(`
+      SELECT 
+        r.id AS recipe_id,
+        r.name AS recipe_name,
+        r.image AS recipe_image,
+        r.date AS recipe_date,
+        l.id AS label_id,
+        l.name AS label_name
+      FROM ${this.table} r
+      LEFT JOIN recipe_label rl ON r.id = rl.recipe_id
+      LEFT JOIN label l ON rl.label_id = l.id
+      WHERE r.id = ?
+    `);
+
+    return rows;
+  }
+
   async readAll() {
     const [rows] = await this.database.query(
       `select id, name, number_of_people, description, image, date, is_favorite, vote, set_up_time, is_validated, user_id, badge_id from ${this.table}`
     );
+
+    return rows;
+  }
+
+  async readLAllLabel() {
+    const [rows] = await this.database.query(`
+      SELECT 
+        r.id AS recipe_id,
+        r.name AS recipe_name,
+        r.image AS recipe_image,
+        r.date AS recipe_date,
+        l.id AS label_id,
+        l.name AS label_name
+      FROM ${this.table} r
+      LEFT JOIN recipe_label rl ON r.id = rl.recipe_id
+      LEFT JOIN label l ON rl.label_id = l.id
+    `);
 
     return rows;
   }

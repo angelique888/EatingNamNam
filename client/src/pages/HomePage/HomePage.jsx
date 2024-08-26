@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
 import RecipeTabs from "../../components/RecipeTabs/RecipeTabs";
@@ -5,8 +6,40 @@ import RecipeTabs from "../../components/RecipeTabs/RecipeTabs";
 function HomePage() {
   const navigate = useNavigate();
 
-  const handleConnection = () => {
-    navigate("/connexion");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3310/api/auth/checkauth",
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setIsAuthenticated(!!data.user);
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la vérification de l'authentification",
+          error
+        );
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
+  const handleDiscoverClick = () => {
+    if (isAuthenticated) {
+      navigate("/recette");
+    } else {
+      navigate("/connexion");
+    }
   };
 
   return (
@@ -30,13 +63,12 @@ function HomePage() {
           <button
             className="hero-button"
             type="button"
-            onClick={handleConnection}
+            onClick={handleDiscoverClick}
           >
             Découvrir
           </button>
         </div>
       </div>
-
       <div className="recipe">
         <h1>Découvrez les 10 dernières recettes postées :</h1>
         <RecipeTabs />

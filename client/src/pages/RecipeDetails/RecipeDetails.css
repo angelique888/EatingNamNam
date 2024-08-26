@@ -142,7 +142,6 @@
 }
 
 .recipeDescription {
-  text-align: justify;
   margin: 1.5rem 0;
   font-family: "now-light";
   color: var(--second-color);

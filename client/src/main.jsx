@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import App from "./App";
 import HomePage from "./pages/HomePage/HomePage";
 import ConnectionPage from "./pages/ConnectionPage/ConnectionPage";
+import RecipePage from "./pages/RecipePage/RecipePage";
 import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
 import IngredientPage from "./pages/IngredientPage/IngredientPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
-import App from "./App";
 import AddRecipePage from "./pages/AddRecipePage/AddRecipePage";
 import ConditionsPage from "./pages/ConditionsPage/ConditionsPage";
 import AboutPage from "./pages/AboutPage/AboutPage";
@@ -16,6 +17,7 @@ import AdminRecipesPage from "./pages/DashboardPage/AdminRecipesPage/AdminRecipe
 import AdminIngredientsPage from "./pages/DashboardPage/AdminIngredientsPage/AdminIngredientsPage";
 import ModifIngredientPage from "./pages/DashboardPage/ModifIngredientPage/ModifIngredientPage";
 import UserRecipesPage from "./pages/DashboardPage/UserRecipesPage/UserRecipesPage";
+import ContactPage from "./pages/ContactPage/ContactPage";
 
 const express = import.meta.env.VITE_API_URL;
 
@@ -36,6 +38,11 @@ const router = createBrowserRouter([
       {
         path: "/connexion",
         element: <ConnectionPage />,
+      },
+      {
+        path: "/recette",
+        element: <RecipePage />,
+        loader: () => fetch(`${express}/api/recipe`),
       },
       {
         path: "/ajout-recette",
@@ -91,7 +98,10 @@ const router = createBrowserRouter([
         element: <UserRecipesPage />,
         loader: ({ params }) => fetch(`${express}/api/user/${params.id}`),
       },
-
+      {
+        path: "/contact",
+        element: <ContactPage />,
+      },
       {
         path: "*",
         element: <h1>Page not found</h1>,
