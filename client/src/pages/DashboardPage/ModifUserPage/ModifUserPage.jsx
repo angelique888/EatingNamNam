@@ -178,20 +178,22 @@ export default function ModifUserPage() {
               })}
             />
           </div>
-
-          <div className="card-role">
-            <label className="card-label" htmlFor="role">
-              Role :
-            </label>
-            <input
-              className="card-input"
-              defaultValue={role}
-              type="text"
-              {...register("role", {
-                required: "Le rôle est requis",
-              })}
-            />
-          </div>
+          {currentUser.role === "admin" && (
+            <div className="card-role">
+              <label className="card-label" htmlFor="role">
+                Role :
+              </label>
+              <input
+                className="card-input"
+                defaultValue={role}
+                type="text"
+                {...register("role", {
+                  required: "Le rôle est requis",
+                })}
+              />
+              {errors.role && <span>{errors.role.message}</span>}
+            </div>
+          )}
           <div className="btn-card-container">
             <button className="btn-card" type="submit">
               Modifier

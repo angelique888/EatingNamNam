@@ -17,7 +17,7 @@ describe("GET /api/items", () => {
     expect(response.status).toBe(200);
     expect(response.body).toStrictEqual(rows);
   });
-});
+}); 
 
 // Test suite for the GET /api/items/:id route
 describe("GET /api/items/:id", () => {

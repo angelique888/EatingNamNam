@@ -62,7 +62,7 @@ const checkAuth = async (req, res) => {
       .cookie("auth_token", token, {
         secure: false,
         httpOnly: true,
-        maxAge: 360000,
+        maxAge: 3600000,
       })
       .json({
         user: validToken,
